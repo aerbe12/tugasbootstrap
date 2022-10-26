@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap</title>
+      <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.korzh.com/metroui/v4.5.1/css/metro-all.min.css">
+    <script src="https://cdn.korzh.com/metroui/v4.5.1/js/metro.min.js"></script>
+   
+  </head >
+<body>
+    <style type="text/css">
+ 
+      form{
+        width: 30%;
+        
+    }
+
+    
+
+    
+    </style>
+    
+    <aside class="sidebar pos-absolute z-2"
+       data-role="sidebar"
+       data-toggle="#sidebar-toggle-3"
+       id="sb3"
+       data-shift=".shifted-content">
+    <div class="sidebar-header" data-image="b.png"  >
+        <div class="avatar">
+            <img src="a.png" height="50px">
+        </div>
+        
+    </div>
+    <ul class="sidebar-menu">
+        <li><a><span class="mif-home icon"></span>Home</a></li>
+        <li><a><span class="mif-books icon"></span>Guide</a></li>
+        <li><a><span class="mif-files-empty icon"></span>Examples</a></li>
+        <li class="divider"></li>
+        <li><a><span class="mif-images icon"></span>Icons</a></li>
+    </ul>
+</aside>
+<div class="shifted-content h-100 p-ab">
+    <div class="app-bar pos-absolute bg-red z-1" data-role="appbar">
+        <button class="app-bar-item c-pointer" id="sidebar-toggle-3">
+            <span class="mif-menu fg-white"></span>
+        </button>
+    </div>
+
+    <div class="h-100 p-4">
+      <div class="container">
+        <h1>Latihan JQuery + Bootstrap</h1><br><br>
+        <form>
+          <div class="form-group">
+            <label>NIM:</label>
+            <input type="text" name="NIM" class="form-control" placeholder="Masukan NIM" required="">
+          </div>
+          <div class="form-group">
+            <label>NAMA:</label>
+            <input type="text" name="NAMA" class="form-control" placeholder="Masukan Nama" required="">
+          </div>
+          <button type="submit" class="btn btn-success btn-save">SIMPAN</button>
+        </form><br><br><br>
+        <table class="table table-bordered data-table">
+          <thead>
+            <th>NIM</th>
+            <th>NAMA</th>
+            <th>Action</th>
+          </thead>
+          <tbody>
+            
+          </tbody>
+        </table>
+      
+      </div> 
+    </div>
+</div> 
+
+
+
+
+   <script type="text/javascript">
+    $("form").submit(function(e) {
+      e.preventDefault();
+      var NIM=$("input[name='NIM']").val();
+      var NAMA=$("input[name='NAMA']").val();
+
+       $(".data-table tbody").append("<tr data-NIM='"+NIM+"' data-NAMA='"+NAMA+"'><td>"+NIM+"</td><td>"+NAMA+"</td><td><button class='btn btn-danger btn-lg btn-delete mr-3' type='button'>Delete</button><button class='btn btn-info btn-lg btn-edit' type='button'>Edit</button></td></tr>");
+
+       $("input[NIM='']").val("");
+    });
+
+    $('body').on('click','.btn-delete',function() {
+      $(this).parents('tr').remove();
+    });
+
+    $('body').on('click','.btn-edit',function() {
+      var NIM=$(this).parents('tr').attr('data-NIM');
+      var NAMA=$(this).parents('tr').attr('data-NAMA');
+
+      $(this).parents('tr').find('td:eq(0)').html("<input NIM='edit_text' value='"+NIM+"'>");
+      $(this).parents('tr').find('td:eq(1)').html("<input NIM='edit_text' value='"+NAMA+"'>");
+
+      $(this).parents('tr').find('td:eq(2)').prepend("<button type='button' class='btn btn-info btn-lg btn-update mr-3'>Update</button>");
+      $(this).hide()
+    });
+
+    $('body').on('click','.btn-update',function() {
+      var NIM=$(this).parents('tr').find("input[name='edit_text']").val();
+      var NAMA=$(this).parents('tr').find("input[name='edit_text']").val();
+
+      $(this).parents('tr').find('td:eq(0)').text(NIM);
+      $(this).parents('tr').find('td:eq(1)').text(NAMA);
+
+      $(this).parents('tr').attr('data-NIM',NIM);
+      $(this).parents('tr').attr('data-NAMA',NAMA);
+
+      $(this).parents('tr').find('.btn-edit').show();
+      $(this).parents('tr').find('.btn-update').remove();
+
+
+    })
+
+   </script>
+
+
+</body>
+</html>
